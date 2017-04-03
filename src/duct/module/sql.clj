@@ -12,7 +12,9 @@
   (options :database-url default-database-url))
 
 (defn- assoc-database [config options]
-  (assoc config :duct.database.sql/hikaricp {:jdbc-url (get-database-url options)}))
+  (assoc-in-default config
+                    [:duct.database.sql/hikaricp]
+                    {:jdbc-url (get-database-url options)}))
 
 (defn- assoc-migrator-defaults [config k]
   (-> config
