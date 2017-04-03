@@ -30,7 +30,9 @@
     (-> config
         (assoc-in-default [k :database]   (ig/ref :duct.database/sql))
         (assoc-in-default [k :migrations] [])
-        (assoc-in-default [k :strategy]   (env-strategy (get-env config options))))))
+        (assoc-in-default [k :strategy]   (env-strategy (get-env config options)))
+        (cond-> (ig/find-derived-1 config :duct/logger)
+          (assoc-in-default [k :logger]   (ig/ref :duct/logger))))))
 
 (defmethod ig/init-key :duct.module/sql [_ options]
   (fn [config]
