@@ -27,8 +27,11 @@
 (defn- get-environment [config options]
   (:environment options (:duct.core/environment config :production)))
 
+(derive :duct.module/sql :duct/module)
+
 (defmethod ig/init-key :duct.module/sql [_ options]
-  (fn [config]
-    (core/merge-configs config
-                        (database-config (:database-url options default-database-url))
-                        (migrator-config (get-environment config options)))))
+  {:req #{:duct/logger}
+   :fn  (fn [config]
+          (core/merge-configs config
+                              (database-config (:database-url options default-database-url))
+                              (migrator-config (get-environment config options))))})

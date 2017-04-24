@@ -4,9 +4,11 @@
             [duct.module.sql :as sql]
             [integrant.core :as ig]))
 
+(derive :duct.logger/fake :duct/logger)
+
 (def base-config
-  {:duct.core/modules [(ig/ref :duct.module/sql)]
-   :duct.module/sql   {:database-url "jdbc:sqlite:"}})
+  {:duct.logger/fake {}
+   :duct.module/sql  {:database-url "jdbc:sqlite:"}})
 
 (deftest module-test
   (testing "blank config"
