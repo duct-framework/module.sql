@@ -18,7 +18,7 @@ To add this module to your configuration, add a reference to
 `:duct.module/sql` to `:duct.core/modules`:
 
 ```edn
-{:duct.core/modules [#ref :duct.module/sql]
+{:duct.core/modules [#ig/ref :duct.module/sql]
  :duct.module/sql   {}}
 ```
 
@@ -33,7 +33,7 @@ can specify it directly by setting the `:database-url` key:
 To add migrations:
 
 ```edn
-{:duct.migrator/ragtime {:migrations [#ref :example.migration/create-foo]}}
+{:duct.migrator/ragtime {:migrations [#ig/ref :example.migration/create-foo]}}
 ```
 
 See [migrator.ragtime][] for more information.
