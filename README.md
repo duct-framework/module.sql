@@ -14,12 +14,10 @@ To install, add the following to your project `:dependencies`:
 
 ## Usage
 
-To add this module to your configuration, add a reference to
-`:duct.module/sql` to `:duct.core/modules`:
+To add this module to your configuration, add the `:duct.module/sql` key:
 
 ```edn
-{:duct.core/modules [#ig/ref :duct.module/sql]
- :duct.module/sql   {}}
+{:duct.module/sql {}}
 ```
 
 By default the module looks for a database URL in the
