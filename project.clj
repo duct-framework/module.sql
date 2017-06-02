@@ -5,6 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0-alpha17"]
                  [duct/core "0.3.3"]
-                 [duct/database.sql.hikaricp "0.1.1"]
-                 [duct/migrator.ragtime "0.1.1"]
+                 [duct/database.sql.hikaricp "0.1.2"]
+                 [duct/migrator.ragtime "0.1.2"]
                  [integrant "0.4.0"]])
