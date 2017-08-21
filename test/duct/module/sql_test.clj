@@ -4,6 +4,8 @@
             [duct.module.sql :as sql]
             [integrant.core :as ig]))
 
+(core/load-hierarchy)
+
 (derive :duct.logger/fake :duct/logger)
 
 (def base-config

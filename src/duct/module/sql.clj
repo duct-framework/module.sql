@@ -1,10 +1,8 @@
 (ns duct.module.sql
-  (:require [integrant.core :as ig]
-            [duct.core :as core]
+  (:require [duct.core :as core]
             [duct.core.env :as env]
             [duct.core.merge :as merge]
-            [duct.database.sql.hikaricp :as hikaricp]
-            [duct.migrator.ragtime :as ragtime]))
+            [integrant.core :as ig]))
 
 (def ^:private default-database-url
   (or (env/env "JDBC_DATABASE_URL")
@@ -26,8 +24,6 @@
 
 (defn- get-environment [config options]
   (:environment options (:duct.core/environment config :production)))
-
-(derive :duct.module/sql :duct/module)
 
 (defmethod ig/init-key :duct.module/sql [_ options]
   {:req #{:duct/logger}
