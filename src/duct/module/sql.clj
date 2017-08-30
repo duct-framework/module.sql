@@ -14,7 +14,8 @@
 
 (defn- database-config [jdbc-url]
   {:duct.database.sql/hikaricp
-   ^:demote {:jdbc-url jdbc-url}})
+   ^:demote {:jdbc-url jdbc-url
+             :logger   (ig/ref :duct/logger)}})
 
 (defn- migrator-config [environment]
   {:duct.migrator/ragtime

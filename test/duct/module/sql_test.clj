@@ -17,7 +17,8 @@
     (is (= (core/prep base-config)
            (merge base-config
                   {:duct.database.sql/hikaricp
-                   {:jdbc-url "jdbc:sqlite:"}
+                   {:jdbc-url "jdbc:sqlite:"
+                    :logger   (ig/ref :duct/logger)}
                    :duct.migrator/ragtime
                    {:database   (ig/ref :duct.database/sql)
                     :logger     (ig/ref :duct/logger)
@@ -29,7 +30,8 @@
       (is (= (core/prep config)
              (merge config
                     {:duct.database.sql/hikaricp
-                     {:jdbc-url "jdbc:sqlite:"}
+                     {:jdbc-url "jdbc:sqlite:"
+                      :logger   (ig/ref :duct/logger)}
                      :duct.migrator/ragtime
                      {:database   (ig/ref :duct.database/sql)
                       :logger     (ig/ref :duct/logger)
@@ -41,7 +43,8 @@
       (is (= (core/prep config)
              (merge config
                     {:duct.database.sql/hikaricp
-                     {:jdbc-url "jdbc:sqlite:"}
+                     {:jdbc-url "jdbc:sqlite:"
+                      :logger   (ig/ref :duct/logger)}
                      :duct.migrator/ragtime
                      {:database   (ig/ref :duct.database/sql)
                       :logger     (ig/ref :duct/logger)
