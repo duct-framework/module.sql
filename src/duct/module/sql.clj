@@ -13,14 +13,15 @@
    :development :rebase})
 
 (defn- database-config [jdbc-url]
-  {:duct.database.sql/hikaricp ^:displace {:jdbc-url jdbc-url}})
+  {:duct.database.sql/hikaricp
+   ^:demote {:jdbc-url jdbc-url}})
 
 (defn- migrator-config [environment]
   {:duct.migrator/ragtime
-   {:database   ^:displace (ig/ref :duct.database/sql)
-    :strategy   (merge/displace (env-strategy environment))
-    :logger     ^:displace (ig/ref :duct/logger)
-    :migrations []}})
+   ^:demote {:database   (ig/ref :duct.database/sql)
+             :strategy   (env-strategy environment)
+             :logger     (ig/ref :duct/logger)
+             :migrations []}})
 
 (defn- get-environment [config options]
   (:environment options (:duct.core/environment config :production)))

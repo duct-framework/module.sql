@@ -34,4 +34,16 @@
                      {:database   (ig/ref :duct.database/sql)
                       :logger     (ig/ref :duct/logger)
                       :strategy   :rebase
+                      :migrations []}})))))
+
+  (testing "config with existing data"
+    (let [config (assoc-in base-config [:duct.migrator/ragtime :strategy] :rebase)]
+      (is (= (core/prep config)
+             (merge config
+                    {:duct.database.sql/hikaricp
+                     {:jdbc-url "jdbc:sqlite:"}
+                     :duct.migrator/ragtime
+                     {:database   (ig/ref :duct.database/sql)
+                      :logger     (ig/ref :duct/logger)
+                      :strategy   :rebase
                       :migrations []}}))))))
