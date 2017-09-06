@@ -7,4 +7,5 @@
                  [duct/core "0.6.1"]
                  [duct/database.sql.hikaricp "0.3.1"]
                  [duct/migrator.ragtime "0.2.0"]
-                 [integrant "0.6.1"]])
+                 [integrant "0.6.1"]
+                 [medley "1.0.0"]])

@@ -7,6 +7,7 @@
 (core/load-hierarchy)
 
 (derive :duct.logger/fake :duct/logger)
+(derive ::test-handler ::sql/requires-db)
 
 (def base-config
   {:duct.logger/fake {}
@@ -49,4 +50,20 @@
                      {:database   (ig/ref :duct.database/sql)
                       :logger     (ig/ref :duct/logger)
                       :strategy   :rebase
-                      :migrations []}}))))))
+                      :migrations []}})))))
+
+  (testing "keys that require a :db key"
+    (let [config (merge base-config {::test-handler {:data "foo"}})]
+      (is (= (core/prep config)
+             (merge config
+                    {:duct.database.sql/hikaricp
+                     {:jdbc-url "jdbc:sqlite:"
+                      :logger   (ig/ref :duct/logger)}
+                     :duct.migrator/ragtime
+                     {:database   (ig/ref :duct.database/sql)
+                      :logger     (ig/ref :duct/logger)
+                      :strategy   :raise-error
+                      :migrations []}
+                     ::test-handler
+                     {:db   (ig/ref :duct.database/sql)
+                      :data "foo"}}))))))

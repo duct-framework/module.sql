@@ -2,7 +2,8 @@
   (:require [duct.core :as core]
             [duct.core.env :as env]
             [duct.core.merge :as merge]
-            [integrant.core :as ig]))
+            [integrant.core :as ig]
+            [medley.core :as m]))
 
 (def ^:private default-database-url
   (or (env/env "JDBC_DATABASE_URL")
@@ -24,12 +25,21 @@
              :logger     (ig/ref :duct/logger)
              :migrations []}})
 
+(defn- populate-required-dbs [config]
+  (m/map-kv (fn [k v]
+              (if (ig/derived-from? k ::requires-db)
+                [k (assoc v :db (ig/ref :duct.database/sql))]
+                [k v]))
+            config))
+
 (defn- get-environment [config options]
   (:environment options (:duct.core/environment config :production)))
 
 (defmethod ig/init-key :duct.module/sql [_ options]
   {:req #{:duct/logger}
    :fn  (fn [config]
-          (core/merge-configs config
-                              (database-config (:database-url options default-database-url))
-                              (migrator-config (get-environment config options))))})
+          (let [db-cfg  (database-config (:database-url options default-database-url))
+                mig-cfg (migrator-config (get-environment config options))]
+            (-> config
+                (core/merge-configs db-cfg mig-cfg)
+                (populate-required-dbs))))})
