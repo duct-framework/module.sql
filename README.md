@@ -10,7 +10,7 @@ A [Duct][] module that adds a SQL database connection pool and
 
 To install, add the following to your project `:dependencies`:
 
-    [duct/module.sql "0.4.0"]
+    [duct/module.sql "0.4.1"]
 
 ## Usage
 
