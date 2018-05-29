@@ -4,8 +4,8 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [duct/core "0.6.2"]
+                 [duct/core "0.7.0-alpha2"]
                  [duct/database.sql.hikaricp "0.3.3"]
                  [duct/migrator.ragtime "0.2.2"]
-                 [integrant "0.6.3"]
+                 [integrant "0.7.0-alpha1"]
                  [medley "1.0.0"]])
