@@ -35,6 +35,20 @@
                :migrations []}}
              (core/build-config config)))))
 
+  (testing "test config"
+    (let [config (assoc base-config :duct.profile/base
+                        {:duct.core/environment :test})]
+      (is (= {:duct.core/environment :test
+              :duct.database.sql/hikaricp
+              {:jdbc-url "jdbc:sqlite:"
+               :logger   (ig/ref :duct/logger)}
+              :duct.migrator/ragtime
+              {:database   (ig/ref :duct.database/sql)
+               :logger     (ig/ref :duct/logger)
+               :strategy   :rebase
+               :migrations []}}
+             (core/build-config config)))))
+
   (testing "config with existing data"
     (let [config (assoc base-config :duct.profile/base
                         {:duct.migrator/ragtime {:strategy :rebase}})]

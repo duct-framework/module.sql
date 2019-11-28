@@ -11,6 +11,7 @@
 
 (def ^:private env-strategy
   {:production  :raise-error
+   :test        :rebase
    :development :rebase})
 
 (defn- database-config [jdbc-url]
