@@ -65,12 +65,8 @@ variables, in this order.
 
 ##### Key Documentation:
 
-[database.sql.hikaricp][]
-
-[migrator.ragtime][]
-
-[database.sql.hikaricp]: https://github.com/duct-framework/database.sql.hikaricp
-[migrator.ragtime]:      https://github.com/duct-framework/migrator.ragtime
+* [database.sql.hikaricp](https://github.com/duct-framework/database.sql.hikaricp)
+* [migrator.ragtime](https://github.com/duct-framework/migrator.ragtime)
 
 ## License
 
