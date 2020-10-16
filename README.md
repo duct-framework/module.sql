@@ -12,7 +12,7 @@ database connection pool and [Ragtime][] migrations to a configuration.
 
 To install, add the following to your project `:dependencies`:
 
-    [duct/module.sql "0.6.0"]
+    [duct/module.sql "0.6.1"]
 
 ## Usage
 
