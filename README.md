@@ -1,4 +1,4 @@
-# Duct module.sql
+# Duct module.sql [![Build Status](https://github.com/duct-framework/module.sql/actions/workflows/test.yml/badge.svg)](https://github.com/duct-framework/module.sql/actions/workflows/test.yml)
 
 A [Duct][] module that adds [Integrant][] keys for a [hikari-cp][] SQL
 database connection pool and [Ragtime][] migrations to a configuration.
