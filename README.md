@@ -10,7 +10,11 @@ database connection pool and [Ragtime][] migrations to a configuration.
 
 ## Installation
 
-To install, add the following to your project `:dependencies`:
+Add the following dependency to your deps.edn file:
+
+    duct/module.sql {:mvn/version "0.6.1"}
+
+Or to your Leiningen project file:
 
     [duct/module.sql "0.6.1"]
 
