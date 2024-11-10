@@ -12,11 +12,11 @@ database connection pool and [Ragtime][] migrations to a configuration.
 
 Add the following dependency to your deps.edn file:
 
-    duct/module.sql {:mvn/version "0.6.1"}
+    org.duct-framework/module.sql {:mvn/version "0.6.1"}
 
 Or to your Leiningen project file:
 
-    [duct/module.sql "0.6.1"]
+    [org.duct-framework/module.sql "0.6.1"]
 
 ## Usage
 
