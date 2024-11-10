@@ -9,10 +9,10 @@
   (testing "main config"
     (is (= {:duct.database.sql/hikaricp
             {:jdbcUrl  "jdbc:sqlite:"
-             :logger   (ig/ref :duct/logger)}
+             :logger   (ig/refset :duct/logger)}
             :duct.migrator/ragtime
             {:database   (ig/ref :duct.database/sql)
-             :logger     (ig/ref :duct/logger)
+             :logger     (ig/refset :duct/logger)
              :strategy   :raise-error
              :migrations-file "migrations.edn"}}
            (-> {:duct.module/sql {}}
@@ -22,10 +22,10 @@
   (testing "repl config"
     (is (= {:duct.database.sql/hikaricp
             {:jdbcUrl  "jdbc:sqlite:"
-             :logger   (ig/ref :duct/logger)}
+             :logger   (ig/refset :duct/logger)}
             :duct.migrator/ragtime
             {:database   (ig/ref :duct.database/sql)
-             :logger     (ig/ref :duct/logger)
+             :logger     (ig/refset :duct/logger)
              :strategy   :rebase
              :migrations-file "migrations.edn"}}
            (-> {:duct.module/sql {}}
@@ -35,10 +35,10 @@
   (testing "test config"
     (is (= {:duct.database.sql/hikaricp
             {:jdbcUrl  "jdbc:sqlite:"
-             :logger   (ig/ref :duct/logger)}
+             :logger   (ig/refset :duct/logger)}
             :duct.migrator/ragtime
             {:database   (ig/ref :duct.database/sql)
-             :logger     (ig/ref :duct/logger)
+             :logger     (ig/refset :duct/logger)
              :strategy   :rebase
              :migrations-file "migrations.edn"}}
            (-> {:duct.module/sql {}}

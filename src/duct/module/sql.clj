@@ -3,10 +3,10 @@
 
 (defmethod ig/expand-key :duct.module/sql [_ _]
   {:duct.database.sql/hikaricp
-   {:logger  (ig/ref :duct/logger)
+   {:logger  (ig/refset :duct/logger)
     :jdbcUrl (ig/var 'jdbc-url)}
    :duct.migrator/ragtime
-   {:logger   (ig/ref :duct/logger)
+   {:logger   (ig/refset :duct/logger)
     :database (ig/ref :duct.database/sql)
     :strategy (ig/profile
                :main :raise-error
