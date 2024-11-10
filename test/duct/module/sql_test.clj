@@ -1,63 +1,46 @@
 (ns duct.module.sql-test
-  (:require [clojure.test :refer :all]
-            [duct.core :as core]
+  (:require [clojure.test :refer [deftest is testing]]
             [duct.module.sql :as sql]
             [integrant.core :as ig]))
 
-(core/load-hierarchy)
-
-(def base-config
-  {:duct.module/sql {:database-url "jdbc:sqlite:"}})
+(ig/load-hierarchy)
 
 (deftest module-test
-  (testing "blank config"
+  (testing "main config"
     (is (= {:duct.database.sql/hikaricp
-            {:jdbc-url "jdbc:sqlite:"
+            {:jdbcUrl  "jdbc:sqlite:"
              :logger   (ig/ref :duct/logger)}
             :duct.migrator/ragtime
             {:database   (ig/ref :duct.database/sql)
              :logger     (ig/ref :duct/logger)
              :strategy   :raise-error
-             :migrations []}}
-           (core/build-config base-config))))
+             :migrations-file "migrations.edn"}}
+           (-> {:duct.module/sql {}}
+               (ig/expand (ig/deprofile [:main]))
+               (ig/bind {'jdbc-url "jdbc:sqlite:"})))))
 
-  (testing "development config"
-    (let [config (assoc base-config :duct.profile/base
-                        {:duct.core/environment :development})]
-      (is (= {:duct.core/environment :development
-              :duct.database.sql/hikaricp
-              {:jdbc-url "jdbc:sqlite:"
-               :logger   (ig/ref :duct/logger)}
-              :duct.migrator/ragtime
-              {:database   (ig/ref :duct.database/sql)
-               :logger     (ig/ref :duct/logger)
-               :strategy   :rebase
-               :migrations []}}
-             (core/build-config config)))))
+  (testing "repl config"
+    (is (= {:duct.database.sql/hikaricp
+            {:jdbcUrl  "jdbc:sqlite:"
+             :logger   (ig/ref :duct/logger)}
+            :duct.migrator/ragtime
+            {:database   (ig/ref :duct.database/sql)
+             :logger     (ig/ref :duct/logger)
+             :strategy   :rebase
+             :migrations-file "migrations.edn"}}
+           (-> {:duct.module/sql {}}
+               (ig/expand (ig/deprofile [:repl]))
+               (ig/bind {'jdbc-url "jdbc:sqlite:"})))))
 
   (testing "test config"
-    (let [config (assoc base-config :duct.profile/base
-                        {:duct.core/environment :test})]
-      (is (= {:duct.core/environment :test
-              :duct.database.sql/hikaricp
-              {:jdbc-url "jdbc:sqlite:"
-               :logger   (ig/ref :duct/logger)}
-              :duct.migrator/ragtime
-              {:database   (ig/ref :duct.database/sql)
-               :logger     (ig/ref :duct/logger)
-               :strategy   :rebase
-               :migrations []}}
-             (core/build-config config)))))
-
-  (testing "config with existing data"
-    (let [config (assoc base-config :duct.profile/base
-                        {:duct.migrator/ragtime {:strategy :rebase}})]
-      (is (= {:duct.database.sql/hikaricp
-              {:jdbc-url "jdbc:sqlite:"
-               :logger   (ig/ref :duct/logger)}
-              :duct.migrator/ragtime
-              {:database   (ig/ref :duct.database/sql)
-               :logger     (ig/ref :duct/logger)
-               :strategy   :rebase
-               :migrations []}}
-             (core/build-config config))))))
+    (is (= {:duct.database.sql/hikaricp
+            {:jdbcUrl  "jdbc:sqlite:"
+             :logger   (ig/ref :duct/logger)}
+            :duct.migrator/ragtime
+            {:database   (ig/ref :duct.database/sql)
+             :logger     (ig/ref :duct/logger)
+             :strategy   :rebase
+             :migrations-file "migrations.edn"}}
+           (-> {:duct.module/sql {}}
+               (ig/expand (ig/deprofile [:test]))
+               (ig/bind {'jdbc-url "jdbc:sqlite:"}))))))

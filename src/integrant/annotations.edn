@@ -1,0 +1,3 @@
+{:duct.module/sql
+ {:duct/vars
+  {jdbc-url {:arg jdbc-url, :env JDBC_DATABASE_URL}}}}
