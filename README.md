@@ -1,12 +1,17 @@
 # Duct module.sql [![Build Status](https://github.com/duct-framework/module.sql/actions/workflows/test.yml/badge.svg)](https://github.com/duct-framework/module.sql/actions/workflows/test.yml)
 
-A [Duct][] module that adds [Integrant][] keys for a [hikari-cp][] SQL
+A [Duct][] module that adds [Integrant][] keys for a [HikariCP][] SQL
 database connection pool and [Ragtime][] migrations to a configuration.
+
+This current version is experimental and will only work with the new
+[duct.main][] tool. The artifact group name has been changed to prevent
+accidental upgrades. The version prior to this change was: `0.6.1`.
 
 [duct]:      https://github.com/duct-framework/duct
 [Integrant]: https://github.com/weavejester/integrant
-[hikari-cp]: https://github.com/tomekw/hikari-cp
+[hikaricp]:  https://github.com/brettwooldridge/HikariCP
 [ragtime]:   https://github.com/weavejester/ragtime
+[duct.main]: https://github.com/duct-framework/duct.main
 
 ## Installation
 
@@ -20,57 +25,33 @@ Or to your Leiningen project file:
 
 ## Usage
 
-To add this module to your configuration, add the `:duct.module/sql`
-key to your `config.edn` file:
+Add the `:duct.module/sql` key to your Duct configuration:
 
 ```edn
-:duct.module/sql {}
+{:duct.module/sql {}}
 ```
+This module uses the Integrant [expand][] function to add the
+following keys to the configuration:
 
-#### Optional Module Parameters
+* `:duct.database.sql/hikaricp` - a SQL datasource
+* `:duct.migrator/ragtime` - applies database migrations
 
-```edn
-:database-url STRING
-```
-JDBC URL for the connection pool. Overridden by `JDBC_DATABASE_URL`,
-`DATABASE_URL` environment variables or custom `:duct.database/sql`
-integrant key.
+This will setup a pooled database connection and a migrator that looks
+for a file `migrations.edn` in the current directory. See the
+documentation on [Ragtime's SQL migrations][migrations] for information
+about the syntax.
 
-#### Integrant Keys
+The JDBC URL is supplied via the `jdbc-url` var. This can be set via the
+`--jdbc-url` command line argument of duct.main, or using the
+`JDBC_DATABASE_URL` environment variable.
 
-When prepped, the module will compile the following Integrant keys into
-your config:
+In the `:main` profile, the Ragtime migration strategy is set to
+`:raise-error`, which will raise an error if there's a conflict. In the
+`:repl` profile, the migration strategy is set to `:rebase`, which will
+attempt to roll back migrations to the conflict, then reapply them all.
 
-
-```edn
-:duct.database.sql/hikaricp {
-    :jdbc-url URL
-    :logger #ig/ref :duct/logger
-}
-
-:duct.migrator/ragtime {
-    :database #ig/ref :duct.database/sql
-    :strategy STRATEGY
-    :logger #ig/ref :duct/logger
-    :migrations []
-}
-```
-
-These defaults can be (selectively) overridden through custom
-`:duct.database/sql` (or `:duct.database.sql/hikaricp`) and
-`:duct.migrator/ragtime` keys in your duct profiles.
-
-`URL` is either overridden, set by the `:database-url` module parameter
-or provided by the `JDBC_DATABASE_URL` and `DATABASE_URL` environment
-variables, in this order.
-
-`STRATEGY` is `:raise-error` for `:production` environment,
-`:rebase` for `:development`.
-
-##### Key Documentation:
-
-* [database.sql.hikaricp](https://github.com/duct-framework/database.sql.hikaricp)
-* [migrator.ragtime](https://github.com/duct-framework/migrator.ragtime)
+[expand]: https://github.com/weavejester/integrant#expanding
+[migrations]: https://github.com/weavejester/ragtime/wiki/SQL-Migrations#edn
 
 ## License
 
