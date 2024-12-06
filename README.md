@@ -17,11 +17,11 @@ accidental upgrades. The version prior to this change was: `0.6.1`.
 
 Add the following dependency to your deps.edn file:
 
-    org.duct-framework/module.sql {:mvn/version "0.7.1"}
+    org.duct-framework/module.sql {:mvn/version "0.8.0"}
 
 Or to your Leiningen project file:
 
-    [org.duct-framework/module.sql "0.7.1"]
+    [org.duct-framework/module.sql "0.8.0"]
 
 ## Usage
 
