@@ -50,6 +50,12 @@ In the `:main` profile, the Ragtime migration strategy is set to
 `:repl` profile, the migration strategy is set to `:rebase`, which will
 attempt to roll back migrations to the conflict, then reapply them all.
 
+When using `:repl` profile, this module will also add two functions to
+the `user` namespace when the system has been initiated:
+
+- `(db)`                - returns the database DataSource
+- `(sql stmt & params)` - execute a SQL statment string
+
 [expand]: https://github.com/weavejester/integrant#expanding
 [migrations]: https://github.com/weavejester/ragtime/wiki/SQL-Migrations#edn
 
