@@ -27,7 +27,10 @@
             {:database   (ig/ref :duct.database/sql)
              :logger     (ig/refset :duct/logger)
              :strategy   :rebase
-             :migrations-file "migrations.edn"}}
+             :migrations-file "migrations.edn"}
+            :duct.repl/refers
+            '{db  duct.repl.sql/db
+              sql duct.repl.sql/sql}}
            (-> {:duct.module/sql {}}
                (ig/expand (ig/deprofile [:repl]))
                (ig/bind {'jdbc-url "jdbc:sqlite:"})))))
