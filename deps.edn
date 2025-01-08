@@ -1,6 +1,6 @@
 {:deps {org.clojure/clojure {:mvn/version "1.12.0"}
         org.duct-framework/database.sql.hikaricp {:mvn/version "0.7.0"}
-        org.duct-framework/migrator.ragtime {:mvn/version "0.5.1"}
+        org.duct-framework/migrator.ragtime {:mvn/version "0.5.2"}
         org.duct-framework/repl.refers {:mvn/version "0.1.0"}
         integrant/integrant {:mvn/version "0.13.1"}
         com.github.seancorfield/next.jdbc {:mvn/version "1.3.967"}}}
