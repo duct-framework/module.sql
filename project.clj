@@ -3,12 +3,12 @@
   :url "https://github.com/duct-framework/module.sql"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.12.0"]
-                 [org.duct-framework/database.sql.hikaricp "0.7.0"]
-                 [org.duct-framework/migrator.ragtime "0.5.2"]
+  :dependencies [[org.clojure/clojure "1.12.2"]
+                 [org.duct-framework/database.sql.hikaricp "0.7.1"]
+                 [org.duct-framework/migrator.ragtime "0.5.3"]
                  [org.duct-framework/repl.refers "0.1.0"]
-                 [integrant "0.13.1"]
-                 [com.github.seancorfield/next.jdbc "1.3.967"]]
+                 [integrant "1.0.0"]
+                 [com.github.seancorfield/next.jdbc "1.3.1070"]]
   :profiles
-  {:dev {:dependencies [[org.xerial/sqlite-jdbc "3.47.1.0"]
-                        [integrant/repl "0.4.0"]]}})
+  {:dev {:dependencies [[org.xerial/sqlite-jdbc "3.50.3.0"]
+                        [integrant/repl "0.5.0"]]}})
