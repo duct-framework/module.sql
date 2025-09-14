@@ -3,4 +3,17 @@
   {jdbc-url
    {:arg jdbc-url
     :env JDBC_DATABASE_URL
-    :doc "The JDBC database URL"}}}}
+    :doc "The JDBC database URL"}}
+  :doc
+  "A module that adds components for accessing SQL databases to the
+  configuration. Takes no options.
+
+  In the `:repl` profile, migrations are run using the `:rebase` strategy
+  (conflicts replace existing migrations), while in the `:main` profile the
+  `:raise-error` strategy is used (conflicts throw exceptions).
+
+  At the REPL, two functions are added to the `user` namespace:
+  - `db` - get a `DataSource` of the running system's database
+  - `sql` - run a SQL statement on the system's database
+
+  A Duct `jdbc-url` variable is added to configure the JDBC database URL."}}
