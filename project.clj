@@ -1,4 +1,4 @@
-(defproject org.duct-framework/module.sql "0.8.0"
+(defproject org.duct-framework/module.sql "0.8.1"
   :description "Duct module for working with a SQL database"
   :url "https://github.com/duct-framework/module.sql"
   :license {:name "Eclipse Public License"
