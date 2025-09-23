@@ -6,7 +6,10 @@
     :doc "The JDBC database URL"}}
   :doc
   "A module that adds components for accessing SQL databases to the
-  configuration. Takes no options.
+  configuration.
+
+  Takes the following option:
+  - `:migrations` - a data structure of [Ragtime SQL Migrations][1]
 
   In the `:repl` profile, migrations are run using the `:rebase` strategy
   (conflicts replace existing migrations), while in the `:main` profile the
@@ -16,4 +19,6 @@
   - `db` - get a `DataSource` of the running system's database
   - `sql` - run a SQL statement on the system's database
 
-  A Duct `jdbc-url` variable is added to configure the JDBC database URL."}}
+  A Duct `jdbc-url` variable is added to configure the JDBC database URL.
+
+  [1]: https://github.com/weavejester/ragtime/wiki/SQL-Migrations#edn"}}

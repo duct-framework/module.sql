@@ -14,8 +14,9 @@
             {:database   (ig/ref :duct.database/sql)
              :logger     (ig/refset :duct/logger)
              :strategy   :raise-error
-             :migrations-file "migrations.edn"}}
-           (-> {:duct.module/sql {}}
+             :migrations '[[:create-table foo (id "INTEGER")]]}}
+           (-> {:duct.module/sql
+                {:migrations '[[:create-table foo (id "INTEGER")]]}}
                (ig/expand (ig/deprofile [:main]))
                (ig/bind {'jdbc-url "jdbc:sqlite:"})))))
 
@@ -27,11 +28,12 @@
             {:database   (ig/ref :duct.database/sql)
              :logger     (ig/refset :duct/logger)
              :strategy   :rebase
-             :migrations-file "migrations.edn"}
+             :migrations '[[:create-table foo (id "INTEGER")]]}
             :duct.repl/refers
             '{db  duct.repl.sql/db
               sql duct.repl.sql/sql}}
-           (-> {:duct.module/sql {}}
+           (-> {:duct.module/sql
+                {:migrations '[[:create-table foo (id "INTEGER")]]}}
                (ig/expand (ig/deprofile [:repl]))
                (ig/bind {'jdbc-url "jdbc:sqlite:"})))))
 
@@ -43,7 +45,8 @@
             {:database   (ig/ref :duct.database/sql)
              :logger     (ig/refset :duct/logger)
              :strategy   :rebase
-             :migrations-file "migrations.edn"}}
-           (-> {:duct.module/sql {}}
+             :migrations '[[:create-table foo (id "INTEGER")]]}}
+           (-> {:duct.module/sql
+                {:migrations '[[:create-table foo (id "INTEGER")]]}}
                (ig/expand (ig/deprofile [:test]))
                (ig/bind {'jdbc-url "jdbc:sqlite:"}))))))

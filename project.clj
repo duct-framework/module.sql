@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.12.2"]
                  [org.duct-framework/database.sql.hikaricp "0.7.1"]
-                 [org.duct-framework/migrator.ragtime "0.5.3"]
+                 [org.duct-framework/migrator.ragtime "0.6.0"]
                  [org.duct-framework/repl.refers "0.1.0"]
                  [integrant "1.0.0"]
                  [com.github.seancorfield/next.jdbc "1.3.1070"]]

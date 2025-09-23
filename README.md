@@ -28,7 +28,7 @@ Or to your Leiningen project file:
 Add the `:duct.module/sql` key to your Duct configuration:
 
 ```edn
-{:duct.module/sql {}}
+{:duct.module/sql {:migrations #duct/include "migrations.edn"}}
 ```
 This module uses the Integrant [expand][] function to add the
 following keys to the configuration:
@@ -36,8 +36,8 @@ following keys to the configuration:
 * `:duct.database.sql/hikaricp` - a SQL datasource
 * `:duct.migrator/ragtime` - applies database migrations
 
-This will setup a pooled database connection and a migrator that looks
-for a file `migrations.edn` in the current directory. See the
+This will setup a pooled database connection and a migrator with
+migrations loaded from the `migrations.edn` include file. See the
 documentation on [Ragtime's SQL migrations][migrations] for information
 about the syntax.
 
